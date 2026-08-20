@@ -33,6 +33,18 @@ tags:
 - Inventory Management
 - Assay Management
 - Workflows
+- Webhook
+- REST
+tags_raw:
+- Life Sciences
+- Biotech
+- LIMS
+- Electronic Lab Notebook
+- Registry
+- Molecular Biology
+- Inventory Management
+- Assay Management
+- Workflows
 - Webhooks
 - REST
 created: '2026-07-04'
@@ -85,6 +97,8 @@ apis:
   humanURL: https://docs.benchling.com/reference
   baseURL: https://{tenant}.benchling.com/api/v2
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -365,6 +379,8 @@ apis:
   humanURL: https://docs.benchling.com/reference
   baseURL: https://{tenant}.benchling.com/api/v2
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -765,6 +781,8 @@ apis:
   humanURL: https://docs.benchling.com/reference
   baseURL: https://{tenant}.benchling.com/api/v2
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
