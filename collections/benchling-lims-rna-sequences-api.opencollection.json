@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences RNA Sequences API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RNA Sequences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List RNA sequences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/rna-sequences"
+          },
+          "docs": "List RNA sequences"
+        },
+        {
+          "info": {
+            "name": "Create an RNA sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/rna-sequences"
+          },
+          "docs": "Create an RNA sequence"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

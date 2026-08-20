@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/benchling-lims-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: 'Personal user API key sent as HTTP Basic auth (Authorization: Basic {api_key}).
+    Generate a key on your Benchling user settings page.'
+  sources:
+  - openapi/benchling-lims-openapi.yml
+- name: appBearerAuth
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.benchling.com/api/v2/token
+    scopes: 0
+  description: Benchling Apps authenticate with OAuth2 client credentials. Exchange client_id/client_secret
+    at POST /api/v2/token for a Bearer access_token.
+  sources:
+  - openapi/benchling-lims-openapi.yml

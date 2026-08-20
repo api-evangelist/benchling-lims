@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Events API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tenant events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/events",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token from a previous response."
+              },
+              {
+                "name": "event_types",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of event types to filter."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Return events created after this ISO 8601 timestamp."
+              }
+            ]
+          },
+          "docs": "Returns a paginated, time-ordered stream of tenant events (entity, entry, result, workflow, and other created/updated events). The same events are delivered push-style via AWS EventBridge and Benchling App webhooks."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

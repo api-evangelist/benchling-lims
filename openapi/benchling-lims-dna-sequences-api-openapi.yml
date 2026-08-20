@@ -1,0 +1,135 @@
+openapi: 3.0.3
+info:
+  title: Benchling AA Sequences DNA Sequences API
+  description: 'Curated OpenAPI for the Benchling life-sciences R&D cloud (LIMS + ELN + registry + inventory + workflows). Benchling exposes a tenant-scoped REST API at https://{tenant}.benchling.com/api/v2 covering the same objects scientists work with in the UI: DNA/RNA/protein sequences, custom entities and the registry, sample inventory, notebook entries, assay results and runs, lab automation, workflow tasks, requests, plus an events stream and Benchling Apps/webhooks.
+
+
+    Every path and method in this document is grounded in Benchling''s own published OpenAPI specification (benchling.com/api/v2/openapi.yaml). This is a curated, representative subset of the full ~325-path Benchling spec - the core CRUD, bulk, and action endpoints per resource - not the exhaustive spec. For the authoritative, complete, always-current definition, fetch Benchling''s published spec.
+
+
+    Authentication: personal user API keys use HTTP Basic (Authorization: Basic {api_key}); Benchling Apps use OAuth2 client credentials (POST /api/v2/token -> Bearer {access_token}). OIDC is available to act as a specific user with their permissions. Note the {tenant} placeholder in the server URL must be replaced with your Benchling tenant subdomain.'
+  version: 2.0.0
+  contact:
+    name: Benchling Developer Platform
+    url: https://docs.benchling.com/docs/developer-platform-overview
+  termsOfService: https://www.benchling.com/terms
+servers:
+- url: https://{tenant}.benchling.com/api/v2
+  description: Tenant-scoped Benchling API. Replace {tenant} with your subdomain.
+  variables:
+    tenant:
+      default: your-tenant
+      description: Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).
+security:
+- basicAuth: []
+- appBearerAuth: []
+tags:
+- name: DNA Sequences
+  description: DNA sequences and sequence-aware operations.
+paths:
+  /dna-sequences:
+    get:
+      operationId: listDnaSequences
+      tags:
+      - DNA Sequences
+      summary: List DNA sequences
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/NextToken'
+      responses:
+        '200':
+          description: A list of DNA sequences.
+    post:
+      operationId: createDnaSequence
+      tags:
+      - DNA Sequences
+      summary: Create a DNA sequence
+      responses:
+        '201':
+          description: The created DNA sequence.
+  /dna-sequences/{dna_sequence_id}:
+    get:
+      operationId: getDnaSequence
+      tags:
+      - DNA Sequences
+      summary: Get a DNA sequence
+      parameters:
+      - name: dna_sequence_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A DNA sequence.
+    patch:
+      operationId: updateDnaSequence
+      tags:
+      - DNA Sequences
+      summary: Update a DNA sequence
+      parameters:
+      - name: dna_sequence_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The updated DNA sequence.
+  /dna-sequences:auto-annotate:
+    post:
+      operationId: autoAnnotateDnaSequences
+      tags:
+      - DNA Sequences
+      summary: Auto-annotate DNA sequences from feature libraries
+      responses:
+        '202':
+          description: An auto-annotate task was started.
+  /dna-sequences:optimize-codons:
+    post:
+      operationId: optimizeCodons
+      tags:
+      - DNA Sequences
+      summary: Optimize codons for a sequence and organism
+      responses:
+        '200':
+          description: The codon-optimized result.
+  /dna-sequences:bulk-create:
+    post:
+      operationId: bulkCreateDnaSequences
+      tags:
+      - DNA Sequences
+      summary: Bulk-create DNA sequences
+      responses:
+        '202':
+          description: A bulk-create task was started.
+components:
+  parameters:
+    NextToken:
+      name: nextToken
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Pagination token from a previous response.
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 100
+      description: Number of results per page.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'Personal user API key sent as HTTP Basic auth (Authorization: Basic {api_key}). Generate a key on your Benchling user settings page.'
+    appBearerAuth:
+      type: oauth2
+      description: Benchling Apps authenticate with OAuth2 client credentials. Exchange client_id/client_secret at POST /api/v2/token for a Bearer access_token.
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.benchling.com/api/v2/token
+          scopes: {}

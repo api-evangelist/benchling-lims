@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Entries API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List notebook entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/entries",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token from a previous response."
+              }
+            ]
+          },
+          "docs": "List notebook entries"
+        },
+        {
+          "info": {
+            "name": "Create a notebook entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/entries"
+          },
+          "docs": "Create a notebook entry"
+        },
+        {
+          "info": {
+            "name": "Get a notebook entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/entries/:entry_id",
+            "params": [
+              {
+                "name": "entry_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a notebook entry"
+        },
+        {
+          "info": {
+            "name": "Update a notebook entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.benchling.com/api/v2/entries/:entry_id",
+            "params": [
+              {
+                "name": "entry_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a notebook entry"
+        },
+        {
+          "info": {
+            "name": "List entry templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/entry-templates"
+          },
+          "docs": "List entry templates"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

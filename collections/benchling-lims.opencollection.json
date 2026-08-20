@@ -1,0 +1,309 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{apiKey}}",
+      "password": ""
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Registry", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List registries.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/registries" },
+          "docs": "Lists the registries on the tenant."
+        },
+        {
+          "info": { "name": "List entity schemas for a registry.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{tenant}}.benchling.com/api/v2/registries/:registry_id/entity-schemas",
+            "params": [{ "name": "registry_id", "value": "", "type": "path", "description": "The API identifier of the registry." }]
+          },
+          "docs": "Lists entity schemas defined in a registry."
+        },
+        {
+          "info": { "name": "Bulk-register entities.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/registries/:registry_id:bulk-register-entities",
+            "params": [{ "name": "registry_id", "value": "", "type": "path", "description": "The API identifier of the registry." }],
+            "body": { "type": "json", "data": "{\n  \"entityIds\": [],\n  \"namingStrategy\": \"NEW_IDS\"\n}" }
+          },
+          "docs": "Registers a set of entities into a registry."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Custom Entities", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List custom entities.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/custom-entities" },
+          "docs": "Lists custom entities."
+        },
+        {
+          "info": { "name": "Create a custom entity.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/custom-entities",
+            "body": { "type": "json", "data": "{\n  \"name\": \"My Entity\",\n  \"schemaId\": \"\",\n  \"folderId\": \"\"\n}" }
+          },
+          "docs": "Creates a custom entity."
+        },
+        {
+          "info": { "name": "Get a custom entity.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{tenant}}.benchling.com/api/v2/custom-entities/:custom_entity_id",
+            "params": [{ "name": "custom_entity_id", "value": "", "type": "path", "description": "The ID of the custom entity." }]
+          },
+          "docs": "Retrieves a custom entity by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Sequences", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List DNA sequences.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/dna-sequences" },
+          "docs": "Lists DNA sequences."
+        },
+        {
+          "info": { "name": "Create a DNA sequence.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/dna-sequences",
+            "body": { "type": "json", "data": "{\n  \"name\": \"My Sequence\",\n  \"bases\": \"ATGC\",\n  \"isCircular\": false,\n  \"folderId\": \"\"\n}" }
+          },
+          "docs": "Creates a DNA sequence."
+        },
+        {
+          "info": { "name": "Auto-annotate DNA sequences.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/dna-sequences:auto-annotate",
+            "body": { "type": "json", "data": "{\n  \"dnaSequenceIds\": [],\n  \"featureLibraryIds\": []\n}" }
+          },
+          "docs": "Auto-annotates DNA sequences from feature libraries."
+        },
+        {
+          "info": { "name": "List AA (protein) sequences.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/aa-sequences" },
+          "docs": "Lists amino-acid sequences."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Inventory", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List locations.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/locations" },
+          "docs": "Lists inventory locations."
+        },
+        {
+          "info": { "name": "List boxes.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/boxes" },
+          "docs": "Lists boxes."
+        },
+        {
+          "info": { "name": "Get box contents.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{tenant}}.benchling.com/api/v2/boxes/:box_id/contents",
+            "params": [{ "name": "box_id", "value": "", "type": "path", "description": "The ID of the box." }]
+          },
+          "docs": "Lists the containers stored in a box."
+        },
+        {
+          "info": { "name": "List containers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/containers" },
+          "docs": "Lists containers (tubes/wells)."
+        },
+        {
+          "info": { "name": "Transfer into a container.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/containers/:destination_container_id:transfer",
+            "params": [{ "name": "destination_container_id", "value": "", "type": "path", "description": "The destination container ID." }],
+            "body": { "type": "json", "data": "{\n  \"sourceContainerId\": \"\",\n  \"transferQuantity\": { \"value\": 10, \"units\": \"uL\" }\n}" }
+          },
+          "docs": "Transfers volume/contents into a destination container."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Notebook (Entries)", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List entries.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/entries" },
+          "docs": "Lists notebook entries."
+        },
+        {
+          "info": { "name": "Create an entry.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/entries",
+            "body": { "type": "json", "data": "{\n  \"name\": \"My Experiment\",\n  \"folderId\": \"\"\n}" }
+          },
+          "docs": "Creates a notebook entry."
+        },
+        {
+          "info": { "name": "List folders.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/folders" },
+          "docs": "Lists folders."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Assay Results & Runs", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List assay results.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/assay-results" },
+          "docs": "Lists assay results."
+        },
+        {
+          "info": { "name": "Bulk-create assay results.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/assay-results:bulk-create",
+            "body": { "type": "json", "data": "{\n  \"assayResults\": []\n}" }
+          },
+          "docs": "Bulk-creates assay results."
+        },
+        {
+          "info": { "name": "List assay runs.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/assay-runs" },
+          "docs": "Lists assay runs."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Workflows", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List workflow task groups.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/workflow-task-groups" },
+          "docs": "Lists workflow task groups."
+        },
+        {
+          "info": { "name": "List workflow tasks.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/workflow-tasks" },
+          "docs": "Lists workflow tasks."
+        },
+        {
+          "info": { "name": "Create a workflow task.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/workflow-tasks",
+            "body": { "type": "json", "data": "{\n  \"schemaId\": \"\",\n  \"workflowTaskGroupId\": \"\"\n}" }
+          },
+          "docs": "Creates a workflow task."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Requests", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List requests.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/requests" },
+          "docs": "Lists requests."
+        },
+        {
+          "info": { "name": "Get a request.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{tenant}}.benchling.com/api/v2/requests/:request_id",
+            "params": [{ "name": "request_id", "value": "", "type": "path", "description": "The ID of the request." }]
+          },
+          "docs": "Retrieves a request by ID."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Events", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List events.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{tenant}}.benchling.com/api/v2/events?pageSize=50",
+            "params": [{ "name": "pageSize", "value": "50", "type": "query", "description": "Number of events per page." }]
+          },
+          "docs": "Polls the tenant event stream. The same events are delivered via AWS EventBridge and Benchling App webhooks."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Apps", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List apps.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/apps" },
+          "docs": "Lists Benchling Apps."
+        },
+        {
+          "info": { "name": "Get an OAuth token (client credentials).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/token",
+            "body": { "type": "urlencoded", "data": "client_id={{appClientId}}&client_secret={{appClientSecret}}&grant_type=client_credentials" }
+          },
+          "docs": "Exchanges Benchling App client credentials for a Bearer access token."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Users, Teams & Organizations", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List users.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/users" },
+          "docs": "Lists users on the tenant."
+        },
+        {
+          "info": { "name": "List teams.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/teams" },
+          "docs": "Lists teams."
+        },
+        {
+          "info": { "name": "List organizations.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/organizations" },
+          "docs": "Lists organizations."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Blobs & Files", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Upload a blob.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://{{tenant}}.benchling.com/api/v2/blobs",
+            "body": { "type": "json", "data": "{\n  \"name\": \"result.csv\",\n  \"data64\": \"\",\n  \"md5\": \"\",\n  \"type\": \"RAW_FILE\"\n}" }
+          },
+          "docs": "Uploads a binary blob attachment."
+        },
+        {
+          "info": { "name": "List files.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{tenant}}.benchling.com/api/v2/files" },
+          "docs": "Lists file objects."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

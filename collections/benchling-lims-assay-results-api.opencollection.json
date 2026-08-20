@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Assay Results API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assay Results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List assay results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/assay-results"
+          },
+          "docs": "List assay results"
+        },
+        {
+          "info": {
+            "name": "Create an assay result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/assay-results"
+          },
+          "docs": "Create an assay result"
+        },
+        {
+          "info": {
+            "name": "Bulk-create assay results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/assay-results:bulk-create"
+          },
+          "docs": "Bulk-create assay results"
+        },
+        {
+          "info": {
+            "name": "Open a result transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/result-transactions"
+          },
+          "docs": "Open a result transaction"
+        },
+        {
+          "info": {
+            "name": "Commit a result transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/result-transactions/:transaction_id:commit",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Commit a result transaction"
+        },
+        {
+          "info": {
+            "name": "List datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/datasets"
+          },
+          "docs": "List datasets"
+        },
+        {
+          "info": {
+            "name": "Create a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/datasets"
+          },
+          "docs": "Create a dataset"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

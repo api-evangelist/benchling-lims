@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Blobs & Files API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blobs & Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/blobs"
+          },
+          "docs": "Upload a blob"
+        },
+        {
+          "info": {
+            "name": "Start a multipart blob upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/blobs:start-multipart-upload"
+          },
+          "docs": "Start a multipart blob upload"
+        },
+        {
+          "info": {
+            "name": "Get a signed download URL for a blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/blobs/:blob_id/download-url",
+            "params": [
+              {
+                "name": "blob_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a signed download URL for a blob"
+        },
+        {
+          "info": {
+            "name": "List files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/files"
+          },
+          "docs": "List files"
+        },
+        {
+          "info": {
+            "name": "Create a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/files"
+          },
+          "docs": "Create a file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

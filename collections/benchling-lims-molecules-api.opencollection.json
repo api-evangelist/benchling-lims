@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Molecules API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Molecules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List molecules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/molecules"
+          },
+          "docs": "List molecules"
+        },
+        {
+          "info": {
+            "name": "Create a molecule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/molecules"
+          },
+          "docs": "Create a molecule"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

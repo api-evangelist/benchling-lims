@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Assay Runs API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assay Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List assay runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/assay-runs"
+          },
+          "docs": "List assay runs"
+        },
+        {
+          "info": {
+            "name": "Create assay runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/assay-runs"
+          },
+          "docs": "Create assay runs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

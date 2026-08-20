@@ -1,0 +1,544 @@
+{
+  "item": [
+    {
+      "id": "d647aae1-ce6d-476e-872c-1a40d69eef84",
+      "name": "Apps",
+      "description": {
+        "content": "Benchling Apps, app config, canvases, and sessions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69a5885b-8636-4174-8997-96955f36d3d6",
+          "name": "List Benchling Apps",
+          "request": {
+            "name": "List Benchling Apps",
+            "description": {},
+            "url": {
+              "path": [
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "372a980a-7c48-473a-9bbf-54642b323234",
+              "name": "A list of apps.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d43a3230-cb5d-4d0c-a9ac-323f6fa78425",
+          "name": "Create a Benchling App",
+          "request": {
+            "name": "Create a Benchling App",
+            "description": {},
+            "url": {
+              "path": [
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56d66fa3-4dd6-401c-80af-8faea6da63e4",
+              "name": "The created app.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a5f4f4e-64eb-4e79-84a3-54500b9eb6bf",
+          "name": "Get a Benchling App",
+          "request": {
+            "name": "Get a Benchling App",
+            "description": {},
+            "url": {
+              "path": [
+                "apps",
+                ":app_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0e3b32d-a5d9-4789-85c8-c57ad7c4ede4",
+              "name": "An app.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "apps",
+                    ":app_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c38d5e9b-a6dc-4c59-ab74-4b9e14872f3f",
+          "name": "List app configuration items",
+          "request": {
+            "name": "List app configuration items",
+            "description": {},
+            "url": {
+              "path": [
+                "app-configuration-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38c3011f-03fa-486b-9e21-4f3a8e8be8aa",
+              "name": "A list of app configuration items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app-configuration-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2551de78-c989-43cf-9601-d31df1225cad",
+          "name": "Create an app canvas",
+          "request": {
+            "name": "Create an app canvas",
+            "description": {},
+            "url": {
+              "path": [
+                "app-canvases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34b3d2c6-cddf-4824-a423-3059598ef0cd",
+              "name": "The created app canvas.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app-canvases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c73119a-0c1a-483b-b0f5-2a6f37c14f9f",
+          "name": "Create an app session",
+          "request": {
+            "name": "Create an app session",
+            "description": {},
+            "url": {
+              "path": [
+                "app-sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95b70d97-dd1a-495e-8bd8-111a5b4631e4",
+              "name": "The created app session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "app-sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-tenant",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.benchling.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bb17cab4-d3b5-4f04-a67f-1da6fd64fb49",
+    "name": "Benchling AA Sequences Apps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Curated OpenAPI for the Benchling life-sciences R&D cloud (LIMS + ELN + registry + inventory + workflows). Benchling exposes a tenant-scoped REST API at https://{tenant}.benchling.com/api/v2 covering the same objects scientists work with in the UI: DNA/RNA/protein sequences, custom entities and the registry, sample inventory, notebook entries, assay results and runs, lab automation, workflow tasks, requests, plus an events stream and Benchling Apps/webhooks.\n\nEvery path and method in this document is grounded in Benchling's own published OpenAPI specification (benchling.com/api/v2/openapi.yaml). This is a curated, representative subset of the full ~325-path Benchling spec - the core CRUD, bulk, and action endpoints per resource - not the exhaustive spec. For the authoritative, complete, always-current definition, fetch Benchling's published spec.\n\nAuthentication: personal user API keys use HTTP Basic (Authorization: Basic {api_key}); Benchling Apps use OAuth2 client credentials (POST /api/v2/token -> Bearer {access_token}). OIDC is available to act as a specific user with their permissions. Note the {tenant} placeholder in the server URL must be replaced with your Benchling tenant subdomain.\n\nContact Support:\n Name: Benchling Developer Platform",
+      "type": "text/plain"
+    }
+  }
+}

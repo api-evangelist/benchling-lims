@@ -1,0 +1,76 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Benchling
+providerId: benchling-lims
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Life Sciences
+- Biotech
+- LIMS
+- Rate Limiting
+- Quotas
+description: >-
+  Benchling documents explicit request rate limits on its tenant-scoped v2 API.
+  By default, all personal user API keys share a limit of 60 requests per 30
+  seconds per tenant; each Benchling App key gets its own 300 requests per 30
+  seconds; and all Benchling Apps on a tenant collectively share 1000 requests
+  per 30 seconds. Because App keys have dedicated limits, moving integrations to
+  Benchling Apps prevents them from consuming the shared user-key budget. Beyond
+  request rate, a separate dynamic throughput limit governs bulk
+  creation/updating of objects - Benchling documents the ability to create or
+  update "tens of thousands of objects an hour," adjusted based on system load.
+  Rate limits are configurable and can be raised by Benchling support on request.
+notes: >-
+  When throttled, Benchling returns HTTP 429 "Rate limit exceeded" and includes
+  x-rate-limit-limit, x-rate-limit-remaining, and x-rate-limit-reset headers.
+  Throttled requests are NOT auto-queued or retried - the client must resend.
+  Benchling recommends exponential backoff with random jitter, and advises
+  significantly backing off or aborting on 5XX errors. Numbers below reflect
+  documented defaults as of the review date; confirm current values and any
+  negotiated increases with Benchling.
+sources:
+- https://docs.benchling.com/docs/rate-limiting
+- https://docs.benchling.com/docs/developer-platform-overview
+- https://docs.benchling.com/docs/getting-started-benchling-apps
+responseCodes:
+  throttled: 429
+headers:
+  limit: x-rate-limit-limit
+  remaining: x-rate-limit-remaining
+  reset: x-rate-limit-reset
+limits:
+- name: User API Keys (per tenant)
+  scope: tenant
+  metric: requests
+  limit: 60 per 30 seconds
+  notes: Shared across all personal user API keys on the tenant.
+- name: App Key (per app)
+  scope: app
+  metric: requests
+  limit: 300 per 30 seconds
+  notes: Each Benchling App gets its own dedicated per-app request limit.
+- name: All Apps (per tenant)
+  scope: tenant
+  metric: requests
+  limit: 1000 per 30 seconds
+  notes: Collective ceiling across all Benchling Apps on the tenant.
+- name: Bulk Throughput
+  scope: tenant
+  metric: objects
+  limit: tens of thousands per hour (dynamic)
+  notes: Dynamic limit for creating/updating objects, adjusted based on system load.
+policies:
+- name: Backoff Strategy
+  description: On 429, retry with exponential backoff and random jitter; throttled requests are not auto-retried and must be resent by the client.
+- name: 5XX Handling
+  description: On 5XX server errors, significantly back off or abort the process rather than retrying aggressively.
+- name: Apps for Isolation
+  description: Run integrations as Benchling Apps so they use dedicated per-app rate limits instead of the shared user-key budget.
+- name: Configurable Limits
+  description: Rate limits are configurable and can be increased by Benchling support upon request.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

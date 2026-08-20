@@ -1,0 +1,401 @@
+{
+  "info": {
+    "name": "Benchling API",
+    "description": "Curated Postman collection for the Benchling life-sciences R&D cloud (LIMS + ELN + registry + inventory + workflows). Base URL is tenant-scoped: https://{{tenant}}.benchling.com/api/v2. Personal user API keys use HTTP Basic (username = API key, password blank); Benchling Apps use OAuth2 client credentials (POST /api/v2/token). Endpoints here are grounded in Benchling's published v2 OpenAPI spec (benchling.com/api/v2/openapi.yaml) and are a representative subset, not the full ~325-path spec.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{apiKey}}", "type": "string" },
+      { "key": "password", "value": "", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://{{tenant}}.benchling.com/api/v2", "type": "string" },
+    { "key": "tenant", "value": "your-tenant", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Registry",
+      "item": [
+        {
+          "name": "List registries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/registries", "host": ["{{baseUrl}}"], "path": ["registries"] },
+            "description": "Lists the registries on the tenant."
+          }
+        },
+        {
+          "name": "List entity schemas for a registry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/registries/:registry_id/entity-schemas", "host": ["{{baseUrl}}"], "path": ["registries", ":registry_id", "entity-schemas"], "variable": [{ "key": "registry_id", "value": "" }] },
+            "description": "Lists entity schemas defined in a registry."
+          }
+        },
+        {
+          "name": "Bulk-register entities",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"entityIds\": [],\n  \"namingStrategy\": \"NEW_IDS\"\n}" },
+            "url": { "raw": "{{baseUrl}}/registries/:registry_id:bulk-register-entities", "host": ["{{baseUrl}}"], "path": ["registries", ":registry_id:bulk-register-entities"], "variable": [{ "key": "registry_id", "value": "" }] },
+            "description": "Registers a set of entities into a registry."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Custom Entities",
+      "item": [
+        {
+          "name": "List custom entities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/custom-entities", "host": ["{{baseUrl}}"], "path": ["custom-entities"] },
+            "description": "Lists custom entities."
+          }
+        },
+        {
+          "name": "Create a custom entity",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"My Entity\",\n  \"schemaId\": \"\",\n  \"folderId\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/custom-entities", "host": ["{{baseUrl}}"], "path": ["custom-entities"] },
+            "description": "Creates a custom entity."
+          }
+        },
+        {
+          "name": "Get a custom entity",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/custom-entities/:custom_entity_id", "host": ["{{baseUrl}}"], "path": ["custom-entities", ":custom_entity_id"], "variable": [{ "key": "custom_entity_id", "value": "" }] },
+            "description": "Retrieves a custom entity by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sequences",
+      "item": [
+        {
+          "name": "List DNA sequences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/dna-sequences", "host": ["{{baseUrl}}"], "path": ["dna-sequences"] },
+            "description": "Lists DNA sequences."
+          }
+        },
+        {
+          "name": "Create a DNA sequence",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"My Sequence\",\n  \"bases\": \"ATGC\",\n  \"isCircular\": false,\n  \"folderId\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/dna-sequences", "host": ["{{baseUrl}}"], "path": ["dna-sequences"] },
+            "description": "Creates a DNA sequence."
+          }
+        },
+        {
+          "name": "Auto-annotate DNA sequences",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"dnaSequenceIds\": [],\n  \"featureLibraryIds\": []\n}" },
+            "url": { "raw": "{{baseUrl}}/dna-sequences:auto-annotate", "host": ["{{baseUrl}}"], "path": ["dna-sequences:auto-annotate"] },
+            "description": "Auto-annotates DNA sequences from feature libraries."
+          }
+        },
+        {
+          "name": "List AA (protein) sequences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/aa-sequences", "host": ["{{baseUrl}}"], "path": ["aa-sequences"] },
+            "description": "Lists amino-acid sequences."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "List locations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/locations", "host": ["{{baseUrl}}"], "path": ["locations"] },
+            "description": "Lists inventory locations."
+          }
+        },
+        {
+          "name": "List boxes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/boxes", "host": ["{{baseUrl}}"], "path": ["boxes"] },
+            "description": "Lists boxes."
+          }
+        },
+        {
+          "name": "Get box contents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/boxes/:box_id/contents", "host": ["{{baseUrl}}"], "path": ["boxes", ":box_id", "contents"], "variable": [{ "key": "box_id", "value": "" }] },
+            "description": "Lists the containers stored in a box."
+          }
+        },
+        {
+          "name": "List containers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/containers", "host": ["{{baseUrl}}"], "path": ["containers"] },
+            "description": "Lists containers (tubes/wells)."
+          }
+        },
+        {
+          "name": "Transfer into a container",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"sourceContainerId\": \"\",\n  \"transferQuantity\": { \"value\": 10, \"units\": \"uL\" }\n}" },
+            "url": { "raw": "{{baseUrl}}/containers/:destination_container_id:transfer", "host": ["{{baseUrl}}"], "path": ["containers", ":destination_container_id:transfer"], "variable": [{ "key": "destination_container_id", "value": "" }] },
+            "description": "Transfers volume/contents into a destination container."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notebook (Entries)",
+      "item": [
+        {
+          "name": "List entries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/entries", "host": ["{{baseUrl}}"], "path": ["entries"] },
+            "description": "Lists notebook entries."
+          }
+        },
+        {
+          "name": "Create an entry",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"My Experiment\",\n  \"folderId\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/entries", "host": ["{{baseUrl}}"], "path": ["entries"] },
+            "description": "Creates a notebook entry."
+          }
+        },
+        {
+          "name": "List folders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/folders", "host": ["{{baseUrl}}"], "path": ["folders"] },
+            "description": "Lists folders."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assay Results & Runs",
+      "item": [
+        {
+          "name": "List assay results",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/assay-results", "host": ["{{baseUrl}}"], "path": ["assay-results"] },
+            "description": "Lists assay results."
+          }
+        },
+        {
+          "name": "Bulk-create assay results",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"assayResults\": []\n}" },
+            "url": { "raw": "{{baseUrl}}/assay-results:bulk-create", "host": ["{{baseUrl}}"], "path": ["assay-results:bulk-create"] },
+            "description": "Bulk-creates assay results."
+          }
+        },
+        {
+          "name": "List assay runs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/assay-runs", "host": ["{{baseUrl}}"], "path": ["assay-runs"] },
+            "description": "Lists assay runs."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workflows",
+      "item": [
+        {
+          "name": "List workflow task groups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/workflow-task-groups", "host": ["{{baseUrl}}"], "path": ["workflow-task-groups"] },
+            "description": "Lists workflow task groups."
+          }
+        },
+        {
+          "name": "List workflow tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/workflow-tasks", "host": ["{{baseUrl}}"], "path": ["workflow-tasks"] },
+            "description": "Lists workflow tasks."
+          }
+        },
+        {
+          "name": "Create a workflow task",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"schemaId\": \"\",\n  \"workflowTaskGroupId\": \"\"\n}" },
+            "url": { "raw": "{{baseUrl}}/workflow-tasks", "host": ["{{baseUrl}}"], "path": ["workflow-tasks"] },
+            "description": "Creates a workflow task."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Requests",
+      "item": [
+        {
+          "name": "List requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/requests", "host": ["{{baseUrl}}"], "path": ["requests"] },
+            "description": "Lists requests."
+          }
+        },
+        {
+          "name": "Get a request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/requests/:request_id", "host": ["{{baseUrl}}"], "path": ["requests", ":request_id"], "variable": [{ "key": "request_id", "value": "" }] },
+            "description": "Retrieves a request by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "List events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/events?pageSize=50", "host": ["{{baseUrl}}"], "path": ["events"], "query": [{ "key": "pageSize", "value": "50" }] },
+            "description": "Polls the tenant event stream. The same events are delivered via AWS EventBridge and Benchling App webhooks."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Apps",
+      "item": [
+        {
+          "name": "List apps",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/apps", "host": ["{{baseUrl}}"], "path": ["apps"] },
+            "description": "Lists Benchling Apps."
+          }
+        },
+        {
+          "name": "Get an OAuth token (client credentials)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/x-www-form-urlencoded" }],
+            "body": { "mode": "urlencoded", "urlencoded": [
+              { "key": "client_id", "value": "{{appClientId}}" },
+              { "key": "client_secret", "value": "{{appClientSecret}}" },
+              { "key": "grant_type", "value": "client_credentials" }
+            ] },
+            "url": { "raw": "{{baseUrl}}/token", "host": ["{{baseUrl}}"], "path": ["token"] },
+            "description": "Exchanges Benchling App client credentials for a Bearer access token."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users, Teams & Organizations",
+      "item": [
+        {
+          "name": "List users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] },
+            "description": "Lists users on the tenant."
+          }
+        },
+        {
+          "name": "List teams",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/teams", "host": ["{{baseUrl}}"], "path": ["teams"] },
+            "description": "Lists teams."
+          }
+        },
+        {
+          "name": "List organizations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/organizations", "host": ["{{baseUrl}}"], "path": ["organizations"] },
+            "description": "Lists organizations."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blobs & Files",
+      "item": [
+        {
+          "name": "Upload a blob",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"result.csv\",\n  \"data64\": \"\",\n  \"md5\": \"\",\n  \"type\": \"RAW_FILE\"\n}" },
+            "url": { "raw": "{{baseUrl}}/blobs", "host": ["{{baseUrl}}"], "path": ["blobs"] },
+            "description": "Uploads a binary blob attachment."
+          }
+        },
+        {
+          "name": "List files",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/files", "host": ["{{baseUrl}}"], "path": ["files"] },
+            "description": "Lists file objects."
+          }
+        }
+      ]
+    }
+  ]
+}

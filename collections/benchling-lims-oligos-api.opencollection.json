@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Oligos API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Oligos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List DNA oligos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-oligos"
+          },
+          "docs": "List DNA oligos"
+        },
+        {
+          "info": {
+            "name": "Create a DNA oligo",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-oligos"
+          },
+          "docs": "Create a DNA oligo"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

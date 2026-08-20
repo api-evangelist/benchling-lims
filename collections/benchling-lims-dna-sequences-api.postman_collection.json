@@ -1,0 +1,661 @@
+{
+  "item": [
+    {
+      "id": "b483cc28-36b5-4932-bf0a-9c6cccd117d1",
+      "name": "DNA Sequences",
+      "description": {
+        "content": "DNA sequences and sequence-aware operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9078b79f-c348-4d7a-90c9-681159b2b1a0",
+          "name": "List DNA sequences",
+          "request": {
+            "name": "List DNA sequences",
+            "description": {},
+            "url": {
+              "path": [
+                "dna-sequences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextToken",
+                  "value": "<string>",
+                  "description": "Pagination token from a previous response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "be5a4ada-d0ac-4d0a-a88f-fd0f979230e2",
+              "name": "A list of DNA sequences.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dna-sequences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "nextToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fb0b86e-2996-4071-81af-40cf2d76cb78",
+          "name": "Create a DNA sequence",
+          "request": {
+            "name": "Create a DNA sequence",
+            "description": {},
+            "url": {
+              "path": [
+                "dna-sequences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e63f9a50-abd1-444d-87d7-0dd8ad2d43a4",
+              "name": "The created DNA sequence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dna-sequences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4faa5caa-d969-4ad3-ab57-949f8cb7c955",
+          "name": "Get a DNA sequence",
+          "request": {
+            "name": "Get a DNA sequence",
+            "description": {},
+            "url": {
+              "path": [
+                "dna-sequences",
+                ":dna_sequence_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dna_sequence_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "414f679c-8041-445c-bc13-7612e50daffd",
+              "name": "A DNA sequence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dna-sequences",
+                    ":dna_sequence_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dna_sequence_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0569b45b-a873-48e4-8bba-b572485f21e7",
+          "name": "Update a DNA sequence",
+          "request": {
+            "name": "Update a DNA sequence",
+            "description": {},
+            "url": {
+              "path": [
+                "dna-sequences",
+                ":dna_sequence_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dna_sequence_id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0805666a-2bed-4465-bf72-546c1fbf1408",
+              "name": "The updated DNA sequence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dna-sequences",
+                    ":dna_sequence_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dna_sequence_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ac5c799-a2ae-4c61-8d73-908785a69cbb",
+          "name": "Auto-annotate DNA sequences from feature libraries",
+          "request": {
+            "name": "Auto-annotate DNA sequences from feature libraries",
+            "description": {},
+            "url": {
+              "path": [
+                "dna-sequences:auto-annotate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74244b64-7a13-4af7-ab83-0d728b689942",
+              "name": "An auto-annotate task was started.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dna-sequences:auto-annotate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "120049f1-5ff1-42e7-85d5-19dff2fc6e70",
+          "name": "Optimize codons for a sequence and organism",
+          "request": {
+            "name": "Optimize codons for a sequence and organism",
+            "description": {},
+            "url": {
+              "path": [
+                "dna-sequences:optimize-codons"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "876d4b69-8a98-44e7-bd2a-edac1fac3275",
+              "name": "The codon-optimized result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dna-sequences:optimize-codons"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2119203e-b673-4f27-b879-d664ba493bcb",
+          "name": "Bulk-create DNA sequences",
+          "request": {
+            "name": "Bulk-create DNA sequences",
+            "description": {},
+            "url": {
+              "path": [
+                "dna-sequences:bulk-create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1805c27-5444-4030-91df-7a1e44f8fac2",
+              "name": "A bulk-create task was started.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dna-sequences:bulk-create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-tenant",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.benchling.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bd7aafa1-efe6-4ace-bec8-90ad8627770a",
+    "name": "Benchling AA Sequences DNA Sequences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Curated OpenAPI for the Benchling life-sciences R&D cloud (LIMS + ELN + registry + inventory + workflows). Benchling exposes a tenant-scoped REST API at https://{tenant}.benchling.com/api/v2 covering the same objects scientists work with in the UI: DNA/RNA/protein sequences, custom entities and the registry, sample inventory, notebook entries, assay results and runs, lab automation, workflow tasks, requests, plus an events stream and Benchling Apps/webhooks.\n\nEvery path and method in this document is grounded in Benchling's own published OpenAPI specification (benchling.com/api/v2/openapi.yaml). This is a curated, representative subset of the full ~325-path Benchling spec - the core CRUD, bulk, and action endpoints per resource - not the exhaustive spec. For the authoritative, complete, always-current definition, fetch Benchling's published spec.\n\nAuthentication: personal user API keys use HTTP Basic (Authorization: Basic {api_key}); Benchling Apps use OAuth2 client credentials (POST /api/v2/token -> Bearer {access_token}). OIDC is available to act as a specific user with their permissions. Note the {tenant} placeholder in the server URL must be replaced with your Benchling tenant subdomain.\n\nContact Support:\n Name: Benchling Developer Platform",
+      "type": "text/plain"
+    }
+  }
+}

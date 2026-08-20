@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Custom Entities API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/custom-entities",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token from a previous response."
+              }
+            ]
+          },
+          "docs": "List custom entities"
+        },
+        {
+          "info": {
+            "name": "Create a custom entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/custom-entities"
+          },
+          "docs": "Create a custom entity"
+        },
+        {
+          "info": {
+            "name": "Get a custom entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/custom-entities/:custom_entity_id",
+            "params": [
+              {
+                "name": "custom_entity_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a custom entity"
+        },
+        {
+          "info": {
+            "name": "Update a custom entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.benchling.com/api/v2/custom-entities/:custom_entity_id",
+            "params": [
+              {
+                "name": "custom_entity_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a custom entity"
+        },
+        {
+          "info": {
+            "name": "Bulk-create custom entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/custom-entities:bulk-create"
+          },
+          "docs": "Bulk-create custom entities"
+        },
+        {
+          "info": {
+            "name": "Bulk-upsert custom entities by registry ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/custom-entities:bulk-upsert"
+          },
+          "docs": "Bulk-upsert custom entities by registry ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,791 @@
+openapi: 3.0.3
+info:
+  title: Benchling API
+  description: >-
+    Curated OpenAPI for the Benchling life-sciences R&D cloud (LIMS + ELN +
+    registry + inventory + workflows). Benchling exposes a tenant-scoped REST
+    API at https://{tenant}.benchling.com/api/v2 covering the same objects
+    scientists work with in the UI: DNA/RNA/protein sequences, custom entities
+    and the registry, sample inventory, notebook entries, assay results and
+    runs, lab automation, workflow tasks, requests, plus an events stream and
+    Benchling Apps/webhooks.
+
+
+    Every path and method in this document is grounded in Benchling's own
+    published OpenAPI specification (benchling.com/api/v2/openapi.yaml). This is
+    a curated, representative subset of the full ~325-path Benchling spec - the
+    core CRUD, bulk, and action endpoints per resource - not the exhaustive
+    spec. For the authoritative, complete, always-current definition, fetch
+    Benchling's published spec.
+
+
+    Authentication: personal user API keys use HTTP Basic
+    (Authorization: Basic {api_key}); Benchling Apps use OAuth2 client
+    credentials (POST /api/v2/token -> Bearer {access_token}). OIDC is available
+    to act as a specific user with their permissions. Note the {tenant}
+    placeholder in the server URL must be replaced with your Benchling tenant
+    subdomain.
+  version: 2.0.0
+  contact:
+    name: Benchling Developer Platform
+    url: https://docs.benchling.com/docs/developer-platform-overview
+  termsOfService: https://www.benchling.com/terms
+servers:
+  - url: https://{tenant}.benchling.com/api/v2
+    description: Tenant-scoped Benchling API. Replace {tenant} with your subdomain.
+    variables:
+      tenant:
+        default: your-tenant
+        description: Your Benchling tenant subdomain (e.g. acme for acme.benchling.com).
+security:
+  - basicAuth: []
+  - appBearerAuth: []
+tags:
+  - name: Registry
+    description: Register/unregister entities and browse registry schemas and dropdowns.
+  - name: Custom Entities
+    description: Schema-driven custom entities registered in Benchling.
+  - name: DNA Sequences
+    description: DNA sequences and sequence-aware operations.
+  - name: RNA Sequences
+    description: RNA sequences and sequence-aware operations.
+  - name: AA Sequences
+    description: Amino-acid (protein) sequences.
+  - name: Oligos
+    description: DNA/RNA oligos.
+  - name: Molecules
+    description: Small molecules.
+  - name: Inventory
+    description: Locations, boxes, containers, and plates for physical samples.
+  - name: Entries
+    description: Electronic lab notebook (ELN) entries and templates.
+  - name: Projects & Folders
+    description: Organize entries and entities into projects and folders.
+  - name: Assay Results
+    description: Structured assay results, including transactional bulk loads.
+  - name: Assay Runs
+    description: Assay runs and their automation input/output generators.
+  - name: Lab Automation
+    description: Automation input generators and output processors for instrument files.
+  - name: Workflows
+    description: Workflow task groups, tasks, and outputs.
+  - name: Requests
+    description: Cross-team service requests, tasks, and fulfillments.
+  - name: Events
+    description: Tenant event stream (also delivered via EventBridge and webhooks).
+  - name: Apps
+    description: Benchling Apps, app config, canvases, and sessions.
+  - name: Users, Teams & Organizations
+    description: People and access model of a tenant.
+  - name: Blobs & Files
+    description: Binary attachments and file objects.
+paths:
+  # ---------------- Registry ----------------
+  /registries:
+    get:
+      operationId: listRegistries
+      tags: [Registry]
+      summary: List registries
+      responses:
+        '200': { description: A list of registries. }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/TooManyRequests' }
+  /registries/{registry_id}:
+    get:
+      operationId: getRegistry
+      tags: [Registry]
+      summary: Get a registry
+      parameters: [{ $ref: '#/components/parameters/RegistryId' }]
+      responses:
+        '200': { description: A registry. }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /registries/{registry_id}/entity-schemas:
+    get:
+      operationId: listEntitySchemasForRegistry
+      tags: [Registry]
+      summary: List entity schemas for a registry
+      parameters: [{ $ref: '#/components/parameters/RegistryId' }]
+      responses:
+        '200': { description: A list of entity schemas. }
+  /registries/{registry_id}:bulk-register-entities:
+    post:
+      operationId: bulkRegisterEntities
+      tags: [Registry]
+      summary: Bulk-register entities into a registry
+      parameters: [{ $ref: '#/components/parameters/RegistryId' }]
+      responses:
+        '202': { description: A registration task was started. }
+  /registries/{registry_id}:unregister-entities:
+    post:
+      operationId: unregisterEntities
+      tags: [Registry]
+      summary: Unregister entities from a registry
+      parameters: [{ $ref: '#/components/parameters/RegistryId' }]
+      responses:
+        '200': { description: Entities were unregistered. }
+
+  # ---------------- Custom Entities ----------------
+  /custom-entities:
+    get:
+      operationId: listCustomEntities
+      tags: [Custom Entities]
+      summary: List custom entities
+      parameters: [{ $ref: '#/components/parameters/PageSize' }, { $ref: '#/components/parameters/NextToken' }]
+      responses:
+        '200': { description: A list of custom entities. }
+    post:
+      operationId: createCustomEntity
+      tags: [Custom Entities]
+      summary: Create a custom entity
+      responses:
+        '201': { description: The created custom entity. }
+  /custom-entities/{custom_entity_id}:
+    get:
+      operationId: getCustomEntity
+      tags: [Custom Entities]
+      summary: Get a custom entity
+      parameters: [{ name: custom_entity_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: A custom entity. }
+    patch:
+      operationId: updateCustomEntity
+      tags: [Custom Entities]
+      summary: Update a custom entity
+      parameters: [{ name: custom_entity_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The updated custom entity. }
+  /custom-entities:bulk-create:
+    post:
+      operationId: bulkCreateCustomEntities
+      tags: [Custom Entities]
+      summary: Bulk-create custom entities
+      responses:
+        '202': { description: A bulk-create task was started. }
+  /custom-entities:bulk-upsert:
+    post:
+      operationId: bulkUpsertCustomEntities
+      tags: [Custom Entities]
+      summary: Bulk-upsert custom entities by registry ID
+      responses:
+        '202': { description: A bulk-upsert task was started. }
+
+  # ---------------- DNA Sequences ----------------
+  /dna-sequences:
+    get:
+      operationId: listDnaSequences
+      tags: [DNA Sequences]
+      summary: List DNA sequences
+      parameters: [{ $ref: '#/components/parameters/PageSize' }, { $ref: '#/components/parameters/NextToken' }]
+      responses:
+        '200': { description: A list of DNA sequences. }
+    post:
+      operationId: createDnaSequence
+      tags: [DNA Sequences]
+      summary: Create a DNA sequence
+      responses:
+        '201': { description: The created DNA sequence. }
+  /dna-sequences/{dna_sequence_id}:
+    get:
+      operationId: getDnaSequence
+      tags: [DNA Sequences]
+      summary: Get a DNA sequence
+      parameters: [{ name: dna_sequence_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: A DNA sequence. }
+    patch:
+      operationId: updateDnaSequence
+      tags: [DNA Sequences]
+      summary: Update a DNA sequence
+      parameters: [{ name: dna_sequence_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The updated DNA sequence. }
+  /dna-sequences:auto-annotate:
+    post:
+      operationId: autoAnnotateDnaSequences
+      tags: [DNA Sequences]
+      summary: Auto-annotate DNA sequences from feature libraries
+      responses:
+        '202': { description: An auto-annotate task was started. }
+  /dna-sequences:optimize-codons:
+    post:
+      operationId: optimizeCodons
+      tags: [DNA Sequences]
+      summary: Optimize codons for a sequence and organism
+      responses:
+        '200': { description: The codon-optimized result. }
+  /dna-sequences:bulk-create:
+    post:
+      operationId: bulkCreateDnaSequences
+      tags: [DNA Sequences]
+      summary: Bulk-create DNA sequences
+      responses:
+        '202': { description: A bulk-create task was started. }
+
+  # ---------------- RNA Sequences ----------------
+  /rna-sequences:
+    get:
+      operationId: listRnaSequences
+      tags: [RNA Sequences]
+      summary: List RNA sequences
+      responses:
+        '200': { description: A list of RNA sequences. }
+    post:
+      operationId: createRnaSequence
+      tags: [RNA Sequences]
+      summary: Create an RNA sequence
+      responses:
+        '201': { description: The created RNA sequence. }
+
+  # ---------------- AA Sequences ----------------
+  /aa-sequences:
+    get:
+      operationId: listAaSequences
+      tags: [AA Sequences]
+      summary: List amino-acid (protein) sequences
+      responses:
+        '200': { description: A list of AA sequences. }
+    post:
+      operationId: createAaSequence
+      tags: [AA Sequences]
+      summary: Create an AA sequence
+      responses:
+        '201': { description: The created AA sequence. }
+  /aa-sequences:back-translate:
+    post:
+      operationId: backTranslateAaSequence
+      tags: [AA Sequences]
+      summary: Back-translate an amino-acid sequence to DNA
+      responses:
+        '202': { description: A back-translate task was started. }
+
+  # ---------------- Oligos & Molecules ----------------
+  /dna-oligos:
+    get:
+      operationId: listDnaOligos
+      tags: [Oligos]
+      summary: List DNA oligos
+      responses:
+        '200': { description: A list of DNA oligos. }
+    post:
+      operationId: createDnaOligo
+      tags: [Oligos]
+      summary: Create a DNA oligo
+      responses:
+        '201': { description: The created DNA oligo. }
+  /molecules:
+    get:
+      operationId: listMolecules
+      tags: [Molecules]
+      summary: List molecules
+      responses:
+        '200': { description: A list of molecules. }
+    post:
+      operationId: createMolecule
+      tags: [Molecules]
+      summary: Create a molecule
+      responses:
+        '201': { description: The created molecule. }
+
+  # ---------------- Inventory ----------------
+  /locations:
+    get:
+      operationId: listLocations
+      tags: [Inventory]
+      summary: List locations
+      responses:
+        '200': { description: A list of locations. }
+    post:
+      operationId: createLocation
+      tags: [Inventory]
+      summary: Create a location
+      responses:
+        '201': { description: The created location. }
+  /boxes:
+    get:
+      operationId: listBoxes
+      tags: [Inventory]
+      summary: List boxes
+      responses:
+        '200': { description: A list of boxes. }
+    post:
+      operationId: createBox
+      tags: [Inventory]
+      summary: Create a box
+      responses:
+        '201': { description: The created box. }
+  /boxes/{box_id}/contents:
+    get:
+      operationId: listBoxContents
+      tags: [Inventory]
+      summary: List the contents of a box
+      parameters: [{ name: box_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The contents of the box. }
+  /containers:
+    get:
+      operationId: listContainers
+      tags: [Inventory]
+      summary: List containers
+      responses:
+        '200': { description: A list of containers. }
+    post:
+      operationId: createContainer
+      tags: [Inventory]
+      summary: Create a container
+      responses:
+        '201': { description: The created container. }
+  /containers/{destination_container_id}:transfer:
+    post:
+      operationId: transferIntoContainer
+      tags: [Inventory]
+      summary: Transfer contents into a destination container
+      parameters: [{ name: destination_container_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The transfer was recorded. }
+  /containers:check-out:
+    post:
+      operationId: checkOutContainers
+      tags: [Inventory]
+      summary: Check out containers
+      responses:
+        '200': { description: Containers were checked out. }
+  /plates:
+    get:
+      operationId: listPlates
+      tags: [Inventory]
+      summary: List plates
+      responses:
+        '200': { description: A list of plates. }
+    post:
+      operationId: createPlate
+      tags: [Inventory]
+      summary: Create a plate
+      responses:
+        '201': { description: The created plate. }
+
+  # ---------------- Entries / Projects / Folders ----------------
+  /entries:
+    get:
+      operationId: listEntries
+      tags: [Entries]
+      summary: List notebook entries
+      parameters: [{ $ref: '#/components/parameters/PageSize' }, { $ref: '#/components/parameters/NextToken' }]
+      responses:
+        '200': { description: A list of entries. }
+    post:
+      operationId: createEntry
+      tags: [Entries]
+      summary: Create a notebook entry
+      responses:
+        '201': { description: The created entry. }
+  /entries/{entry_id}:
+    get:
+      operationId: getEntry
+      tags: [Entries]
+      summary: Get a notebook entry
+      parameters: [{ name: entry_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: An entry. }
+    patch:
+      operationId: updateEntry
+      tags: [Entries]
+      summary: Update a notebook entry
+      parameters: [{ name: entry_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The updated entry. }
+  /entry-templates:
+    get:
+      operationId: listEntryTemplates
+      tags: [Entries]
+      summary: List entry templates
+      responses:
+        '200': { description: A list of entry templates. }
+  /projects:
+    get:
+      operationId: listProjects
+      tags: [Projects & Folders]
+      summary: List projects
+      responses:
+        '200': { description: A list of projects. }
+  /folders:
+    get:
+      operationId: listFolders
+      tags: [Projects & Folders]
+      summary: List folders
+      responses:
+        '200': { description: A list of folders. }
+    post:
+      operationId: createFolder
+      tags: [Projects & Folders]
+      summary: Create a folder
+      responses:
+        '201': { description: The created folder. }
+
+  # ---------------- Assay Results / Runs / Automation ----------------
+  /assay-results:
+    get:
+      operationId: listAssayResults
+      tags: [Assay Results]
+      summary: List assay results
+      responses:
+        '200': { description: A list of assay results. }
+    post:
+      operationId: createAssayResult
+      tags: [Assay Results]
+      summary: Create an assay result
+      responses:
+        '201': { description: The created assay result. }
+  /assay-results:bulk-create:
+    post:
+      operationId: bulkCreateAssayResults
+      tags: [Assay Results]
+      summary: Bulk-create assay results
+      responses:
+        '202': { description: A bulk-create task was started. }
+  /result-transactions:
+    post:
+      operationId: createResultTransaction
+      tags: [Assay Results]
+      summary: Open a result transaction
+      responses:
+        '201': { description: The created result transaction. }
+  /result-transactions/{transaction_id}:commit:
+    post:
+      operationId: commitResultTransaction
+      tags: [Assay Results]
+      summary: Commit a result transaction
+      parameters: [{ name: transaction_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The transaction was committed. }
+  /assay-runs:
+    get:
+      operationId: listAssayRuns
+      tags: [Assay Runs]
+      summary: List assay runs
+      responses:
+        '200': { description: A list of assay runs. }
+    post:
+      operationId: createAssayRuns
+      tags: [Assay Runs]
+      summary: Create assay runs
+      responses:
+        '201': { description: The created assay runs. }
+  /automation-output-processors:
+    get:
+      operationId: listAutomationOutputProcessors
+      tags: [Lab Automation]
+      summary: List automation output processors
+      responses:
+        '200': { description: A list of automation output processors. }
+    post:
+      operationId: createAutomationOutputProcessor
+      tags: [Lab Automation]
+      summary: Create an automation output processor
+      responses:
+        '201': { description: The created output processor. }
+  /automation-output-processors/{output_processor_id}:process-output:
+    post:
+      operationId: processAutomationOutput
+      tags: [Lab Automation]
+      summary: Process an automation output file into results
+      parameters: [{ name: output_processor_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '202': { description: A processing task was started. }
+  /datasets:
+    get:
+      operationId: listDatasets
+      tags: [Assay Results]
+      summary: List datasets
+      responses:
+        '200': { description: A list of datasets. }
+    post:
+      operationId: createDataset
+      tags: [Assay Results]
+      summary: Create a dataset
+      responses:
+        '201': { description: The created dataset. }
+
+  # ---------------- Workflows ----------------
+  /workflow-task-groups:
+    get:
+      operationId: listWorkflowTaskGroups
+      tags: [Workflows]
+      summary: List workflow task groups
+      responses:
+        '200': { description: A list of workflow task groups. }
+    post:
+      operationId: createWorkflowTaskGroup
+      tags: [Workflows]
+      summary: Create a workflow task group
+      responses:
+        '201': { description: The created workflow task group. }
+  /workflow-tasks:
+    get:
+      operationId: listWorkflowTasks
+      tags: [Workflows]
+      summary: List workflow tasks
+      responses:
+        '200': { description: A list of workflow tasks. }
+    post:
+      operationId: createWorkflowTask
+      tags: [Workflows]
+      summary: Create a workflow task
+      responses:
+        '201': { description: The created workflow task. }
+  /workflow-tasks/{workflow_task_id}:
+    get:
+      operationId: getWorkflowTask
+      tags: [Workflows]
+      summary: Get a workflow task
+      parameters: [{ name: workflow_task_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: A workflow task. }
+    patch:
+      operationId: updateWorkflowTask
+      tags: [Workflows]
+      summary: Update a workflow task
+      parameters: [{ name: workflow_task_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The updated workflow task. }
+  /workflow-outputs:
+    get:
+      operationId: listWorkflowOutputs
+      tags: [Workflows]
+      summary: List workflow outputs
+      responses:
+        '200': { description: A list of workflow outputs. }
+    post:
+      operationId: createWorkflowOutput
+      tags: [Workflows]
+      summary: Create a workflow output
+      responses:
+        '201': { description: The created workflow output. }
+
+  # ---------------- Requests ----------------
+  /requests:
+    get:
+      operationId: listRequests
+      tags: [Requests]
+      summary: List requests
+      responses:
+        '200': { description: A list of requests. }
+    post:
+      operationId: createRequest
+      tags: [Requests]
+      summary: Create a request
+      responses:
+        '201': { description: The created request. }
+  /requests/{request_id}:
+    get:
+      operationId: getRequest
+      tags: [Requests]
+      summary: Get a request
+      parameters: [{ name: request_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: A request. }
+    patch:
+      operationId: updateRequest
+      tags: [Requests]
+      summary: Update a request
+      parameters: [{ name: request_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The updated request. }
+  /requests/{request_id}:execute-sample-groups:
+    post:
+      operationId: executeRequestSampleGroups
+      tags: [Requests]
+      summary: Execute sample groups on a request
+      parameters: [{ name: request_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: The sample groups were executed. }
+  /request-fulfillments:
+    get:
+      operationId: listRequestFulfillments
+      tags: [Requests]
+      summary: List request fulfillments
+      responses:
+        '200': { description: A list of request fulfillments. }
+
+  # ---------------- Events ----------------
+  /events:
+    get:
+      operationId: listEvents
+      tags: [Events]
+      summary: List tenant events
+      description: >-
+        Returns a paginated, time-ordered stream of tenant events (entity, entry,
+        result, workflow, and other created/updated events). The same events are
+        delivered push-style via AWS EventBridge and Benchling App webhooks.
+      parameters:
+        - { $ref: '#/components/parameters/PageSize' }
+        - { $ref: '#/components/parameters/NextToken' }
+        - { name: event_types, in: query, required: false, schema: { type: string }, description: Comma-separated list of event types to filter. }
+        - { name: since, in: query, required: false, schema: { type: string }, description: Return events created after this ISO 8601 timestamp. }
+      responses:
+        '200': { description: A list of events. }
+        '429': { $ref: '#/components/responses/TooManyRequests' }
+
+  # ---------------- Apps ----------------
+  /apps:
+    get:
+      operationId: listApps
+      tags: [Apps]
+      summary: List Benchling Apps
+      responses:
+        '200': { description: A list of apps. }
+    post:
+      operationId: createApp
+      tags: [Apps]
+      summary: Create a Benchling App
+      responses:
+        '201': { description: The created app. }
+  /apps/{app_id}:
+    get:
+      operationId: getApp
+      tags: [Apps]
+      summary: Get a Benchling App
+      parameters: [{ name: app_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: An app. }
+  /app-configuration-items:
+    get:
+      operationId: listAppConfigurationItems
+      tags: [Apps]
+      summary: List app configuration items
+      responses:
+        '200': { description: A list of app configuration items. }
+  /app-canvases:
+    post:
+      operationId: createAppCanvas
+      tags: [Apps]
+      summary: Create an app canvas
+      responses:
+        '201': { description: The created app canvas. }
+  /app-sessions:
+    post:
+      operationId: createAppSession
+      tags: [Apps]
+      summary: Create an app session
+      responses:
+        '201': { description: The created app session. }
+
+  # ---------------- Users / Teams / Organizations ----------------
+  /users:
+    get:
+      operationId: listUsers
+      tags: [Users, Teams & Organizations]
+      summary: List users
+      responses:
+        '200': { description: A list of users. }
+    post:
+      operationId: createUser
+      tags: [Users, Teams & Organizations]
+      summary: Create a user
+      responses:
+        '201': { description: The created user. }
+  /teams:
+    get:
+      operationId: listTeams
+      tags: [Users, Teams & Organizations]
+      summary: List teams
+      responses:
+        '200': { description: A list of teams. }
+  /teams/{team_id}/memberships:
+    get:
+      operationId: listTeamMemberships
+      tags: [Users, Teams & Organizations]
+      summary: List team memberships
+      parameters: [{ name: team_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: A list of team memberships. }
+  /organizations:
+    get:
+      operationId: listOrganizations
+      tags: [Users, Teams & Organizations]
+      summary: List organizations
+      responses:
+        '200': { description: A list of organizations. }
+
+  # ---------------- Blobs / Files ----------------
+  /blobs:
+    post:
+      operationId: createBlob
+      tags: [Blobs & Files]
+      summary: Upload a blob
+      responses:
+        '201': { description: The created blob. }
+  /blobs:start-multipart-upload:
+    post:
+      operationId: startMultipartBlobUpload
+      tags: [Blobs & Files]
+      summary: Start a multipart blob upload
+      responses:
+        '200': { description: A multipart upload was started. }
+  /blobs/{blob_id}/download-url:
+    get:
+      operationId: getBlobDownloadUrl
+      tags: [Blobs & Files]
+      summary: Get a signed download URL for a blob
+      parameters: [{ name: blob_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        '200': { description: A signed download URL. }
+  /files:
+    get:
+      operationId: listFiles
+      tags: [Blobs & Files]
+      summary: List files
+      responses:
+        '200': { description: A list of files. }
+    post:
+      operationId: createFile
+      tags: [Blobs & Files]
+      summary: Create a file
+      responses:
+        '201': { description: The created file. }
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Personal user API key sent as HTTP Basic auth
+        (Authorization: Basic {api_key}). Generate a key on your Benchling user
+        settings page.
+    appBearerAuth:
+      type: oauth2
+      description: >-
+        Benchling Apps authenticate with OAuth2 client credentials. Exchange
+        client_id/client_secret at POST /api/v2/token for a Bearer access_token.
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.benchling.com/api/v2/token
+          scopes: {}
+  parameters:
+    RegistryId:
+      name: registry_id
+      in: path
+      required: true
+      schema: { type: string }
+      description: The API identifier of the registry.
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      schema: { type: integer, default: 50, maximum: 100 }
+      description: Number of results per page.
+    NextToken:
+      name: nextToken
+      in: query
+      required: false
+      schema: { type: string }
+      description: Pagination token from a previous response.
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
+    TooManyRequests:
+      description: >-
+        Rate limit exceeded. Benchling returns 429 with x-rate-limit-limit,
+        x-rate-limit-remaining, and x-rate-limit-reset headers. Back off with
+        exponential backoff and jitter; requests are not auto-retried.

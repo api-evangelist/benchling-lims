@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/benchling-lims-openapi.yml
+docs: https://docs.benchling.com/docs/authentication
+note: Benchling's OAuth2 client-credentials flow does not use scopes - app permissions
+  are granted by adding the app as a collaborator to organizations, teams, and projects,
+  so a Bearer token can do anything the app has been granted in the UI
+  (https://docs.benchling.com/docs/authentication).
+schemes:
+- name: appBearerAuth
+  source: openapi/benchling-lims-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.benchling.com/api/v2/token
+  description: Benchling Apps authenticate with OAuth2 client credentials. Exchange client_id/client_secret
+    at POST /api/v2/token for a Bearer access_token.
+scopes: []

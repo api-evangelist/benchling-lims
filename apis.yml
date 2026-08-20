@@ -1,0 +1,871 @@
+aid: benchling-lims
+url: https://raw.githubusercontent.com/api-evangelist/benchling-lims/refs/heads/main/apis.yml
+name: Benchling
+kind: company
+description: Benchling is a life-sciences R&D cloud - a unified LIMS, electronic
+  lab notebook (ELN), molecular biology registry, sample inventory, and workflow
+  platform for biotech and pharma. Its tenant-scoped REST API (v2) exposes the
+  same objects scientists work with in the UI - DNA/RNA/protein sequences, custom
+  entities and the registry, inventory (boxes, locations, containers, plates),
+  notebook entries, assay results and runs, lab-automation transforms, workflow
+  tasks, and requests - plus events and webhooks for event-driven automation.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/benchling-lims.png
+tags:
+- Life Sciences
+- Biotech
+- LIMS
+- Electronic Lab Notebook
+- Registry
+- Molecular Biology
+- Inventory Management
+- Assay Management
+- Workflows
+- Webhooks
+- REST
+created: '2026-07-04'
+modified: '2026-07-04'
+specificationVersion: '0.23'
+apis:
+- aid: benchling-lims:benchling-lims-aa-sequences-api
+  name: Benchling AA Sequences API
+  description: Amino-acid (protein) sequences.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - AA Sequences
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-aa-sequences-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-apps-api
+  name: Benchling Apps API
+  description: Benchling Apps, app config, canvases, and sessions.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Apps
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-apps-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-assay-results-api
+  name: Benchling Assay Results API
+  description: Structured assay results, including transactional bulk loads.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Assay Results
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-assay-results-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-assay-runs-api
+  name: Benchling Assay Runs API
+  description: Assay runs and their automation input/output generators.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Assay Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-assay-runs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-blobs-files-api
+  name: Benchling Blobs & Files API
+  description: Binary attachments and file objects.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Blobs & Files
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-blobs-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-custom-entities-api
+  name: Benchling Custom Entities API
+  description: Schema-driven custom entities registered in Benchling.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Custom Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-custom-entities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-dna-sequences-api
+  name: Benchling DNA Sequences API
+  description: DNA sequences and sequence-aware operations.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - DNA Sequences
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-dna-sequences-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-entries-api
+  name: Benchling Entries API
+  description: Electronic lab notebook (ELN) entries and templates.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Entries
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-entries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-events-api
+  name: Benchling Events API
+  description: Tenant event stream (also delivered via EventBridge and webhooks).
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-inventory-api
+  name: Benchling Inventory API
+  description: Locations, boxes, containers, and plates for physical samples.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-lab-automation-api
+  name: Benchling Lab Automation API
+  description: Automation input generators and output processors for instrument files.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Lab Automation
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-lab-automation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-molecules-api
+  name: Benchling Molecules API
+  description: Small molecules.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Molecules
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-molecules-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-oligos-api
+  name: Benchling Oligos API
+  description: DNA/RNA oligos.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Oligos
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-oligos-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-projects-folders-api
+  name: Benchling Projects & Folders API
+  description: Organize entries and entities into projects and folders.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Projects & Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-projects-folders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-registry-api
+  name: Benchling Registry API
+  description: Register/unregister entities and browse registry schemas and dropdowns.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Registry
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-registry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-requests-api
+  name: Benchling Requests API
+  description: Cross-team service requests, tasks, and fulfillments.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-requests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-rna-sequences-api
+  name: Benchling RNA Sequences API
+  description: RNA sequences and sequence-aware operations.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - RNA Sequences
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-rna-sequences-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-teams-organizations-api
+  name: Benchling Teams & Organizations API
+  description: The Teams & Organizations API from Benchling — 4 operation(s) for teams & organizations.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Teams & Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-teams-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-users-api
+  name: Benchling Users API
+  description: The Users API from Benchling — 4 operation(s) for users.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+- aid: benchling-lims:benchling-lims-workflows-api
+  name: Benchling Workflows API
+  description: Workflow task groups, tasks, and outputs.
+  humanURL: https://docs.benchling.com/reference
+  baseURL: https://{tenant}.benchling.com/api/v2
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/benchling-lims-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.benchling.com/docs/registry
+  - type: APIReference
+    url: https://docs.benchling.com/reference
+  - type: PostmanCollection
+    url: collections/benchling-lims.postman_collection.json
+  - type: OpenCollection
+    url: collections/benchling-lims.opencollection.json
+  - type: Documentation
+    url: https://docs.benchling.com/docs/sequences
+  - type: Documentation
+    url: https://docs.benchling.com/docs/inventory
+  - type: Documentation
+    url: https://docs.benchling.com/docs/entries
+  - type: Documentation
+    url: https://docs.benchling.com/docs/results
+  - type: Documentation
+    url: https://docs.benchling.com/docs/workflows
+  - type: Documentation
+    url: https://docs.benchling.com/docs/requests
+  - type: Documentation
+    url: https://docs.benchling.com/docs/events-getting-started
+  - type: Documentation
+    url: https://docs.benchling.com/docs/getting-started-benchling-apps
+  - type: Webhooks
+    url: https://docs.benchling.com/docs/getting-started-with-webhooks
+  - type: Documentation
+    url: https://docs.benchling.com/docs/organizations
+  - type: Documentation
+    url: https://docs.benchling.com/docs/blobs
+common:
+- type: AgenticAccess
+  url: agentic-access/benchling-lims-agentic-access.yml
+- type: TrustCenter
+  url: security/benchling-lims-trust-center.yml
+- type: DomainSecurity
+  url: security/benchling-lims-domain-security.yml
+- type: Authentication
+  url: authentication/benchling-lims-authentication.yml
+- type: OAuthScopes
+  url: scopes/benchling-lims-scopes.yml
+- type: GitHubOrganization
+  url: https://github.com/benchling
+- type: LinkedIn
+  url: https://www.linkedin.com/company/benchling
+- type: Website
+  url: https://www.benchling.com
+- type: Documentation
+  url: https://docs.benchling.com/docs/developer-platform-overview
+- type: Plans
+  url: plans/benchling-lims-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/benchling-lims-rate-limits.yml
+- type: FinOps
+  url: finops/benchling-lims-finops.yml
+- type: Blog
+  url: https://www.benchling.com/blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

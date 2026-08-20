@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AA Sequences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List amino-acid (protein) sequences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/aa-sequences"
+          },
+          "docs": "List amino-acid (protein) sequences"
+        },
+        {
+          "info": {
+            "name": "Create an AA sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/aa-sequences"
+          },
+          "docs": "Create an AA sequence"
+        },
+        {
+          "info": {
+            "name": "Back-translate an amino-acid sequence to DNA",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/aa-sequences:back-translate"
+          },
+          "docs": "Back-translate an amino-acid sequence to DNA"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

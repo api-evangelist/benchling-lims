@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Inventory API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/locations"
+          },
+          "docs": "List locations"
+        },
+        {
+          "info": {
+            "name": "Create a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/locations"
+          },
+          "docs": "Create a location"
+        },
+        {
+          "info": {
+            "name": "List boxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/boxes"
+          },
+          "docs": "List boxes"
+        },
+        {
+          "info": {
+            "name": "Create a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/boxes"
+          },
+          "docs": "Create a box"
+        },
+        {
+          "info": {
+            "name": "List the contents of a box",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/boxes/:box_id/contents",
+            "params": [
+              {
+                "name": "box_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the contents of a box"
+        },
+        {
+          "info": {
+            "name": "List containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/containers"
+          },
+          "docs": "List containers"
+        },
+        {
+          "info": {
+            "name": "Create a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/containers"
+          },
+          "docs": "Create a container"
+        },
+        {
+          "info": {
+            "name": "Transfer contents into a destination container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/containers/:destination_container_id:transfer",
+            "params": [
+              {
+                "name": "destination_container_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Transfer contents into a destination container"
+        },
+        {
+          "info": {
+            "name": "Check out containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/containers:check-out"
+          },
+          "docs": "Check out containers"
+        },
+        {
+          "info": {
+            "name": "List plates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/plates"
+          },
+          "docs": "List plates"
+        },
+        {
+          "info": {
+            "name": "Create a plate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/plates"
+          },
+          "docs": "Create a plate"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

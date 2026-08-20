@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Lab Automation API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lab Automation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List automation output processors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/automation-output-processors"
+          },
+          "docs": "List automation output processors"
+        },
+        {
+          "info": {
+            "name": "Create an automation output processor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/automation-output-processors"
+          },
+          "docs": "Create an automation output processor"
+        },
+        {
+          "info": {
+            "name": "Process an automation output file into results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/automation-output-processors/:output_processor_id:process-output",
+            "params": [
+              {
+                "name": "output_processor_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Process an automation output file into results"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Registry API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Registry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/registries"
+          },
+          "docs": "List registries"
+        },
+        {
+          "info": {
+            "name": "Get a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/registries/:registry_id",
+            "params": [
+              {
+                "name": "registry_id",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier of the registry."
+              }
+            ]
+          },
+          "docs": "Get a registry"
+        },
+        {
+          "info": {
+            "name": "List entity schemas for a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/registries/:registry_id/entity-schemas",
+            "params": [
+              {
+                "name": "registry_id",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier of the registry."
+              }
+            ]
+          },
+          "docs": "List entity schemas for a registry"
+        },
+        {
+          "info": {
+            "name": "Bulk-register entities into a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/registries/:registry_id:bulk-register-entities",
+            "params": [
+              {
+                "name": "registry_id",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier of the registry."
+              }
+            ]
+          },
+          "docs": "Bulk-register entities into a registry"
+        },
+        {
+          "info": {
+            "name": "Unregister entities from a registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/registries/:registry_id:unregister-entities",
+            "params": [
+              {
+                "name": "registry_id",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier of the registry."
+              }
+            ]
+          },
+          "docs": "Unregister entities from a registry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

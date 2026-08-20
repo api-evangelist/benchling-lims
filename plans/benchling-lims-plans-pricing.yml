@@ -1,0 +1,141 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Benchling
+providerId: benchling-lims
+created: '2026-07-04'
+modified: '2026-07-04'
+reconciled: false
+tags:
+- Life Sciences
+- Biotech
+- LIMS
+- Electronic Lab Notebook
+- Plans
+description: >-
+  Benchling is a sales-led enterprise SaaS platform and does not publish
+  transparent list pricing; most plans are quoted by contacting sales. There is
+  a free Academic plan for individual academics, university labs, and classes.
+  Commercial plans are tiered - a discounted Benchling for Startups package, a
+  Professional plan for small-to-mid biotech, and an Enterprise plan for larger
+  organizations with more complex requirements and validation needs. Programmatic
+  API access, Benchling Apps, events, and webhooks are features of the paid
+  commercial tiers (Professional and Enterprise), not the free Academic tier.
+  Pricing is typically per-user/per-year with implementation and add-on
+  application costs on top. Public third-party estimates put Startup around
+  $15K/yr, Professional around $20K/yr (roughly a 5-user minimum), and Enterprise
+  as fully custom (six to seven figures for large deployments); these figures are
+  unofficial and must be confirmed with Benchling sales.
+notes: >-
+  The API itself is not separately metered or billed - it is included with the
+  commercial tiers that enable it. Verify current tiers, seat minimums, included
+  applications (Registry, Notebook, Inventory, Requests, Insights, etc.), and
+  quotes directly with Benchling. Dollar figures here are unofficial
+  third-party estimates for orientation only.
+sources:
+- https://www.benchling.com/pricing
+- https://docs.benchling.com/docs/developer-platform-overview
+- https://docs.benchling.com/docs/rate-limiting
+plans:
+- id: benchling-academic
+  name: Academic (Free)
+  type: free
+  description: >-
+    Free plan for individual academics, university labs, and classes. Provides
+    core Benchling notebook and molecular biology tools. API access and
+    enterprise applications are generally not part of this tier.
+  entries:
+  - label: Academic Users
+    name: academic_users
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: free (eligibility required)
+    userMultiplied: false
+  elements:
+  - name: Notebook (ELN)
+  - name: Molecular Biology Tools
+  - name: Academic Eligibility Required
+- id: benchling-startups
+  name: Benchling for Startups
+  type: subscription
+  description: >-
+    Discounted commercial package aimed at early-stage biotech startups. Bundles
+    core applications with API access; quoted by sales. Third-party estimates
+    start around $15K/yr.
+  entries:
+  - label: Startup Subscription
+    name: startup_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (est. ~$15K/yr, unofficial)
+    userMultiplied: true
+  elements:
+  - name: Registry
+  - name: Notebook (ELN)
+  - name: API Access
+  - name: Events and Webhooks
+- id: benchling-professional
+  name: Professional
+  type: subscription
+  description: >-
+    Commercial plan for small-to-mid-size biotech teams. Per-user annual
+    subscription with a seat minimum; includes programmatic API access,
+    Benchling Apps, events, and webhooks. Third-party estimates start around
+    $20K/yr with roughly a 5-user minimum.
+  entries:
+  - label: Professional Seats
+    name: professional_seats
+    type: flat
+    metric: seats
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (est. ~$20K/yr, ~5-user minimum, unofficial)
+    userMultiplied: true
+  elements:
+  - name: Registry
+  - name: Notebook (ELN)
+  - name: Inventory
+  - name: Requests and Workflows
+  - name: API Access
+  - name: Benchling Apps
+  - name: Events and Webhooks
+- id: benchling-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom plan for larger organizations with complex requirements - additional
+    applications (Insights, Bioprocess, Molecular Biology suite), validation and
+    compliance (GxP / 21 CFR Part 11), SSO/OIDC, higher rate limits, EventBridge
+    integration, security review, SLAs, and dedicated support. Fully custom
+    pricing.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: All Applications
+  - name: Validation and Compliance (GxP / 21 CFR Part 11)
+  - name: SSO / OIDC
+  - name: AWS EventBridge Integration
+  - name: Configurable / Higher Rate Limits
+  - name: SLAs and Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,180 @@
+aid: benchling-lims
+name: Benchling
+review:
+  question: Does Benchling expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-04'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Benchling's own public developer surface
+    is a request/response REST API (base https://{tenant}.benchling.com/api/v2).
+    Benchling delivers change notifications as EVENTS, not as a WebSocket or SSE
+    stream on its own API: clients either poll GET /api/v2/events, or receive
+    the same events pushed to AWS EventBridge and to Benchling App webhooks
+    (server-to-endpoint HTTP POST). None of these is a bidirectional or
+    server-push WebSocket (ws:// / wss://) transport on Benchling's API, so
+    there is no WebSocket channel to model.
+findings:
+  summary: |
+    Benchling does not publish a documented public WebSocket API. Benchling is a
+    life-sciences R&D cloud (LIMS + electronic lab notebook + molecular biology
+    registry + inventory + workflows). Its public developer platform is a
+    tenant-scoped REST API at https://{tenant}.benchling.com/api/v2, defined by a
+    published OpenAPI spec (benchling.com/api/v2/openapi.yaml, ~325 paths).
+    Authentication is HTTP Basic with a personal user API key, or OAuth2 client
+    credentials for Benchling Apps (POST /api/v2/token -> Bearer token); OIDC is
+    available to act as a specific user with their permissions. Event-driven
+    integration is done three ways, none of them WebSocket: (1) polling the REST
+    events endpoint GET /api/v2/events; (2) AWS EventBridge, where Benchling
+    pushes events to a partner event bus in the customer's AWS account; and
+    (3) Benchling App webhooks, where Benchling HTTP POSTs event/canvas payloads
+    to an app's registered URL. No realtime, bidirectional, or streaming
+    WebSocket (ws:// or wss://) endpoint is documented anywhere in Benchling's
+    developer docs as of the review date.
+  openSource: |
+    The Benchling platform itself is proprietary, closed-source, sales-led
+    enterprise SaaS (no self-hostable core). Benchling does publish open-source
+    developer tooling on GitHub (github.com/benchling) - notably the official
+    Python SDK (benchling-sdk on PyPI), app-examples, and integration-examples -
+    but these are clients of the hosted API, not the platform source.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://{tenant}.benchling.com/api/v2
+      documented: true
+      note: Tenant-scoped v2 REST API defined by benchling.com/api/v2/openapi.yaml. HTTP Basic (user API key) or OAuth2 client credentials (Benchling Apps).
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Benchling Apps receive events and canvas interactions as server-to-endpoint HTTP POST webhooks. Not WebSocket.
+    - protocol: EventBridge
+      scheme: https
+      documented: true
+      note: Events can be pushed to an AWS EventBridge partner event bus in the customer account. AWS transport, not a Benchling WebSocket.
+    - protocol: HTTP Poll
+      scheme: https
+      documented: true
+      note: GET /api/v2/events is a client-initiated poll of the tenant event stream, not server push.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Benchling's API reference, events docs, webhooks docs, or app framework as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://{tenant}.benchling.com/api/v2/registries
+    - POST   https://{tenant}.benchling.com/api/v2/registries/{registry_id}:bulk-register-entities
+    - POST   https://{tenant}.benchling.com/api/v2/registries/{registry_id}:unregister-entities
+    - GET    https://{tenant}.benchling.com/api/v2/custom-entities
+    - POST   https://{tenant}.benchling.com/api/v2/custom-entities
+    - GET    https://{tenant}.benchling.com/api/v2/custom-entities/{custom_entity_id}
+    - GET    https://{tenant}.benchling.com/api/v2/dna-sequences
+    - POST   https://{tenant}.benchling.com/api/v2/dna-sequences
+    - POST   https://{tenant}.benchling.com/api/v2/dna-sequences:auto-annotate
+    - POST   https://{tenant}.benchling.com/api/v2/dna-sequences:optimize-codons
+    - GET    https://{tenant}.benchling.com/api/v2/aa-sequences
+    - POST   https://{tenant}.benchling.com/api/v2/aa-sequences:back-translate
+    - GET    https://{tenant}.benchling.com/api/v2/rna-sequences
+    - GET    https://{tenant}.benchling.com/api/v2/dna-oligos
+    - GET    https://{tenant}.benchling.com/api/v2/molecules
+    - GET    https://{tenant}.benchling.com/api/v2/locations
+    - GET    https://{tenant}.benchling.com/api/v2/boxes
+    - GET    https://{tenant}.benchling.com/api/v2/boxes/{box_id}/contents
+    - GET    https://{tenant}.benchling.com/api/v2/containers
+    - POST   https://{tenant}.benchling.com/api/v2/containers/{destination_container_id}:transfer
+    - POST   https://{tenant}.benchling.com/api/v2/containers:check-out
+    - GET    https://{tenant}.benchling.com/api/v2/plates
+    - GET    https://{tenant}.benchling.com/api/v2/entries
+    - POST   https://{tenant}.benchling.com/api/v2/entries
+    - GET    https://{tenant}.benchling.com/api/v2/entry-templates
+    - GET    https://{tenant}.benchling.com/api/v2/projects
+    - GET    https://{tenant}.benchling.com/api/v2/folders
+    - GET    https://{tenant}.benchling.com/api/v2/assay-results
+    - POST   https://{tenant}.benchling.com/api/v2/assay-results:bulk-create
+    - POST   https://{tenant}.benchling.com/api/v2/result-transactions
+    - POST   https://{tenant}.benchling.com/api/v2/result-transactions/{transaction_id}:commit
+    - GET    https://{tenant}.benchling.com/api/v2/assay-runs
+    - GET    https://{tenant}.benchling.com/api/v2/automation-output-processors
+    - POST   https://{tenant}.benchling.com/api/v2/automation-output-processors/{output_processor_id}:process-output
+    - GET    https://{tenant}.benchling.com/api/v2/datasets
+    - GET    https://{tenant}.benchling.com/api/v2/workflow-task-groups
+    - GET    https://{tenant}.benchling.com/api/v2/workflow-tasks
+    - POST   https://{tenant}.benchling.com/api/v2/workflow-tasks
+    - GET    https://{tenant}.benchling.com/api/v2/workflow-outputs
+    - GET    https://{tenant}.benchling.com/api/v2/requests
+    - POST   https://{tenant}.benchling.com/api/v2/requests
+    - POST   https://{tenant}.benchling.com/api/v2/requests/{request_id}:execute-sample-groups
+    - GET    https://{tenant}.benchling.com/api/v2/request-fulfillments
+    - GET    https://{tenant}.benchling.com/api/v2/events
+    - GET    https://{tenant}.benchling.com/api/v2/apps
+    - POST   https://{tenant}.benchling.com/api/v2/app-canvases
+    - POST   https://{tenant}.benchling.com/api/v2/app-sessions
+    - POST   https://{tenant}.benchling.com/api/v2/token
+    - GET    https://{tenant}.benchling.com/api/v2/users
+    - GET    https://{tenant}.benchling.com/api/v2/teams
+    - GET    https://{tenant}.benchling.com/api/v2/organizations
+    - POST   https://{tenant}.benchling.com/api/v2/blobs
+    - GET    https://{tenant}.benchling.com/api/v2/files
+  endpointsModeled:
+    note: |
+      The curated OpenAPI in openapi/benchling-lims-openapi.yml is a
+      representative subset (core CRUD, bulk, and action endpoints per resource)
+      of Benchling's full ~325-path published spec. Every path/method it
+      contains is grounded in Benchling's own published OpenAPI
+      (benchling.com/api/v2/openapi.yaml); it does not invent endpoints. For the
+      authoritative, complete, always-current definition, use Benchling's
+      published spec directly.
+sources:
+  - url: https://docs.benchling.com/docs/developer-platform-overview
+    type: Documentation
+    note: Developer platform overview; tenant-scoped REST API, SDK, apps, events.
+  - url: https://benchling.com/api/v2/openapi.yaml
+    type: OpenAPI
+    note: Benchling's own published OpenAPI 3.0 spec (~325 paths, base /api/v2). Ground truth for all confirmed endpoints.
+  - url: https://benchling.com/api/reference
+    type: APIReference
+    note: Interactive API reference (redirect target of docs.benchling.com/reference). All endpoints are HTTPS REST.
+  - url: https://docs.benchling.com/docs/getting-started-benchling-apps
+    type: Authentication
+    note: HTTP Basic user API keys; OAuth2 client credentials for apps at POST /api/v2/token; OIDC to act as a user. No WebSocket.
+  - url: https://docs.benchling.com/docs/rate-limiting
+    type: RateLimits
+    note: 60 req/30s per tenant (user keys), 300 req/30s per app key, 1000 req/30s all apps; 429 with x-rate-limit-* headers.
+  - url: https://docs.benchling.com/docs/events-getting-started
+    type: Events
+    note: Events via GET /api/v2/events poll and AWS EventBridge. No WebSocket.
+  - url: https://docs.benchling.com/docs/getting-started-with-webhooks
+    type: Webhooks
+    note: Benchling App webhooks are server-to-endpoint HTTP POST. Not WebSocket.
+  - url: https://github.com/benchling
+    type: SourceCode
+    note: Official open-source SDK and examples (clients of the hosted API); the platform itself is proprietary.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Benchling's own public API is
+    request/response REST (base https://{tenant}.benchling.com/api/v2), and its
+    event delivery is via a REST poll (GET /api/v2/events), AWS EventBridge, and
+    HTTP webhooks - none of which is a server-push WebSocket or SSE transport on
+    Benchling's own API. No AsyncAPI document was created because there is no
+    WebSocket (or SSE) channel on Benchling's API to model.
+overlap:
+  existingFolder: all/benchling
+  note: |
+    A separate, older all/benchling entry already exists (aid: benchling,
+    type: Index, single monolithic "Benchling REST API", created 2026-06-13).
+    It carries the full published Benchling OpenAPI (openapi/benchling-openapi.yaml,
+    ~1.1MB, 325 paths) plus graphql/, json-schema/, json-ld/, vocabulary/, and
+    examples/. This benchling-lims entry is DISTINCT: it re-frames the same
+    provider under the newer 0.19 kind: company model, decomposing the one big
+    REST API into 11 logical product APIs (Registry, Sequences, Inventory,
+    Notebook, Results/Runs, Workflows, Requests, Events, Apps/Webhooks,
+    Org/Users, Blobs/Files) with LIMS-oriented framing. It is partially
+    REDUNDANT with all/benchling (same base URL, same underlying API). Flag for
+    the maintainer: decide whether to keep both (benchling = raw full-spec index;
+    benchling-lims = curated multi-API LIMS view) or consolidate. Benchling does
+    NOT have a documented public GraphQL API despite the graphql/ folder in the
+    older entry; its public interface is REST v2.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

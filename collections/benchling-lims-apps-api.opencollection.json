@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Apps API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Benchling Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/apps"
+          },
+          "docs": "List Benchling Apps"
+        },
+        {
+          "info": {
+            "name": "Create a Benchling App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/apps"
+          },
+          "docs": "Create a Benchling App"
+        },
+        {
+          "info": {
+            "name": "Get a Benchling App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/apps/:app_id",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Benchling App"
+        },
+        {
+          "info": {
+            "name": "List app configuration items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/app-configuration-items"
+          },
+          "docs": "List app configuration items"
+        },
+        {
+          "info": {
+            "name": "Create an app canvas",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/app-canvases"
+          },
+          "docs": "Create an app canvas"
+        },
+        {
+          "info": {
+            "name": "Create an app session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/app-sessions"
+          },
+          "docs": "Create an app session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

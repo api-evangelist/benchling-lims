@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences Workflows API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List workflow task groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-task-groups"
+          },
+          "docs": "List workflow task groups"
+        },
+        {
+          "info": {
+            "name": "Create a workflow task group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-task-groups"
+          },
+          "docs": "Create a workflow task group"
+        },
+        {
+          "info": {
+            "name": "List workflow tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-tasks"
+          },
+          "docs": "List workflow tasks"
+        },
+        {
+          "info": {
+            "name": "Create a workflow task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-tasks"
+          },
+          "docs": "Create a workflow task"
+        },
+        {
+          "info": {
+            "name": "Get a workflow task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-tasks/:workflow_task_id",
+            "params": [
+              {
+                "name": "workflow_task_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a workflow task"
+        },
+        {
+          "info": {
+            "name": "Update a workflow task",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-tasks/:workflow_task_id",
+            "params": [
+              {
+                "name": "workflow_task_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a workflow task"
+        },
+        {
+          "info": {
+            "name": "List workflow outputs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-outputs"
+          },
+          "docs": "List workflow outputs"
+        },
+        {
+          "info": {
+            "name": "Create a workflow output",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/workflow-outputs"
+          },
+          "docs": "Create a workflow output"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

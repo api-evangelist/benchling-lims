@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Benchling AA Sequences DNA Sequences API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DNA Sequences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List DNA sequences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-sequences",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "nextToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token from a previous response."
+              }
+            ]
+          },
+          "docs": "List DNA sequences"
+        },
+        {
+          "info": {
+            "name": "Create a DNA sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-sequences"
+          },
+          "docs": "Create a DNA sequence"
+        },
+        {
+          "info": {
+            "name": "Get a DNA sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-sequences/:dna_sequence_id",
+            "params": [
+              {
+                "name": "dna_sequence_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a DNA sequence"
+        },
+        {
+          "info": {
+            "name": "Update a DNA sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-sequences/:dna_sequence_id",
+            "params": [
+              {
+                "name": "dna_sequence_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a DNA sequence"
+        },
+        {
+          "info": {
+            "name": "Auto-annotate DNA sequences from feature libraries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-sequences:auto-annotate"
+          },
+          "docs": "Auto-annotate DNA sequences from feature libraries"
+        },
+        {
+          "info": {
+            "name": "Optimize codons for a sequence and organism",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-sequences:optimize-codons"
+          },
+          "docs": "Optimize codons for a sequence and organism"
+        },
+        {
+          "info": {
+            "name": "Bulk-create DNA sequences",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.benchling.com/api/v2/dna-sequences:bulk-create"
+          },
+          "docs": "Bulk-create DNA sequences"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
