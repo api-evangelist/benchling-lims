@@ -9,6 +9,18 @@ description: Benchling is a life-sciences R&D cloud - a unified LIMS, electronic
   entities and the registry, inventory (boxes, locations, containers, plates),
   notebook entries, assay results and runs, lab-automation transforms, workflow
   tasks, and requests - plus events and webhooks for event-driven automation.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
