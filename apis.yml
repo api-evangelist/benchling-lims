@@ -870,6 +870,9 @@ apis:
   - type: Documentation
     url: https://docs.benchling.com/docs/blobs
 common:
+- type: CapabilityMap
+  url: capabilities/benchling-lims-capability-edges.yml
+  name: Benchling Business Capability Map
 - type: AgenticAccess
   url: agentic-access/benchling-lims-agentic-access.yml
 - type: TrustCenter
